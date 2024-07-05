@@ -5,21 +5,7 @@ import 'package:firebase_todoapp/services/local_database_service.dart';
 class TodoService {
   final todoCollection = FirebaseFirestore.instance.collection('todoApp');
 
-  //
-  // Future<void> addNewTask(Taskmodel model) async {
-  //   await LocalDatabaseService().insertTask(model);
-  // }
-  //
-  // Future<void> updateTask(Taskmodel model) async {
-  //   await LocalDatabaseService().updateTask(model);
-  // }
 
-  // Future<void> backupTasks() async {
-  //   final tasks = await LocalDatabaseService().getTasks();
-  //   for (var task in tasks) {
-  //     await todoCollection.doc(task.id).set(task.toMap());
-  //   }
-  // }
   Future<void> updateTask(Taskmodel task) async {
     await todoCollection.doc(task.id).update(task.toMap());
   }
@@ -45,28 +31,6 @@ class TodoService {
     }
   }
 
-  // Future<void> backupTasks(List<Taskmodel> localTasks) async {
-  //   final firestoreTasks = await todoCollection.get();
-  //   final firestoreTaskIds = firestoreTasks.docs.map((doc) => doc.id).toSet();
-  //
-  //   for (var task in localTasks) {
-  //     if (!firestoreTaskIds.contains(task.id)) {
-  //       await todoCollection.doc(task.id).set(task.toMap());
-  //     }
-  //   }
-  //}
-  //
-  // Future<void> backupTasks(List<Taskmodel> tasks) async {
-  //
-  //
-  //   final firestoreTasks = await todoCollection.get();
-  //
-  //   for (var task in tasks) {
-  //     if (!firestoreTasks.docs.any((doc) => doc.id == task.id)) {
-  //       await todoCollection.doc(task.id).set(task.toMap());
-  //     }
-  //   }
-  // }
   Future<void> fetchBackupTasks() async {
     final querySnapshot = await todoCollection.get();
     final localTasks = await LocalDatabaseService().getTasks();
