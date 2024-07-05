@@ -3,6 +3,8 @@ import 'package:firebase_todoapp/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+//application that sync user data on local db and firebase using riverpod
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

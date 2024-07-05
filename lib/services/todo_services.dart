@@ -16,7 +16,8 @@ class TodoService {
     final localTaskIds = localTasks.map((task) => task.id).toSet();
 
     // Delete tasks from Firestore that no longer exist in local database
-    //it will check that if
+    //it will check that if there is any task that is available in firebase but user has deleted it from db
+    //then it will delete that task from firebase
     for (var doc in firestoreTasks.docs) {
       if (!localTaskIds.contains(doc.id)) {
         await todoCollection.doc(doc.id).delete();
